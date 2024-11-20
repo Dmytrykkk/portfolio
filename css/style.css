@@ -1,0 +1,653 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    font-family: 'Poppins', sans-serif;
+
+}
+.content::-webkit-scrollbar {
+    display: none;
+}
+.grid {
+    display: grid;
+    grid-gap: 0;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 35vw 65vw;
+    grid-template-areas: 
+      "sidebar right-top"
+      "sidebar header"
+      "sidebar content"
+      "sidebar right-bot";
+    background-color: #181616;
+    color: #c5c5c5;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+    z-index: 1; /* Ensure content is behind the sidebar shadow */
+}
+  
+.grid div {
+    display: grid;
+    font-size: 40px;
+}
+
+.right-top{
+    grid-area: right-top;
+    display: grid;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 10vh;
+    width: 65vw;
+    background-color: #181616;
+    z-index: 1;
+}
+
+.right-bot{
+    grid-area: right-bot;
+    display: grid;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 10vh;
+    width: 65vw;
+    background-color: #181616;
+    z-index: 1;
+}
+
+.header {
+    grid-area: header;
+    top: 10vh;
+    right: 0;
+    width: 65vw;
+    height: 11.5vh;
+    display: grid;
+    position: fixed;
+    align-content: end;
+    justify-content: start; /* Вирівнювання контенту по лівому краю */
+    padding-left: 20px; 
+    border-bottom: 1.5vh solid #1b1b1b;
+    background: linear-gradient(to right, #232323, #1f1f1f);
+    color: #68b300;
+    z-index: 2;
+    box-sizing: border-box;
+}
+
+.header a {
+    margin-left: 10px; /* Відступ між посиланнями */
+    padding: 10px 20px; /* Внутрішній відступ */
+    font-size: 50px; /* Розмір шрифту */
+    text-decoration: none; /* Заборона підкреслення */
+    color: inherit; /* Спадкування кольору від заголовка */
+    display: inline-block; /* Щоб працювали відступи */
+}
+
+.sidebar {
+    grid-area: sidebar;
+    height: 100vh;
+    grid-gap: 0;
+    display: grid;
+    position: fixed;
+    grid-template-areas: 
+        "left-top   photo"
+        "navigation photo"
+        "left-bot   name";
+    grid-template-columns: 10vw 25vw;
+    justify-items: center;
+    background-color: #1b1b1b;
+    box-shadow: 15px 0 25px rgba(0, 0, 0, 0.5); /* Shadow coming from the left sidebar */
+    z-index: 3; /* Ensure sidebar stays in front of content */
+}
+
+.left-top {
+    grid-area: left-top;
+    position: fixed;
+    display: grid;
+    height: 10vh;
+    width: 10vw;
+    background-color: #181616;
+}
+
+.left-bot {
+    grid-area: left-bot;
+    position: fixed;
+    display: grid;
+    bottom: 0;
+    height: 10vh;
+    width: 10vw;
+    background-color: #181616;
+}
+
+.sidebar .photo {
+    grid-area: photo;
+    height: 100vh;
+    width: 25vw;
+    display: flex;
+    position: fixed;
+    background-image: url('../image/korshun.png');
+    background-size: cover;
+    background-position: center;
+    box-shadow: -15px 0 20px rgba(0, 0, 0, 0.7); /* Тінь зліва */
+    z-index: 4;
+}
+
+
+
+.sidebar .name {
+    grid-area: name;
+    color: #c5c5c5;
+    width: 25vw;
+    height: 20vh;
+    position: fixed;
+    bottom: 0;
+    background-color: rgba(9, 18, 0, 0.444);
+    display: grid;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 7;
+}
+
+.sidebar .navigation {
+    z-index: 2;
+    top: 10vh;
+    grid-area: navigation;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрує по вертикалі */
+    align-items: center; /* Центрує по горизонталі */
+    height: 80vh;
+    width: 10vw;
+    gap: 2vh;
+    background-color: #272727;
+    text-align: center;
+}
+
+.sidebar .navigation a {
+    display: flex;
+    justify-content: center; /* Центрує контент всередині кнопки по горизонталі */
+    align-items: center; /* Центрує контент всередині кнопки по вертикалі */
+    border-radius: 10%; 
+    color: #c5c5c5;
+    font-size: 18px;
+    width: 12vh;
+    height: 12vh;
+    background-color: #363636;
+    transition: background-color 0.5s;
+    text-decoration: none;
+}
+
+.sidebar .navigation a:hover {
+    background-color: #3b6c13;
+}
+
+.sidebar .navigation img {
+    width: 10vh;
+    height: 10vh;
+    object-fit: contain;
+}
+
+
+.content {
+    grid-area: content;
+    position: fixed; /* Фіксоване положення в межах вікна */
+    top: calc(10vh + 11.5vh); /* Відступ від верхньої межі (header) */
+    bottom: 10vh; /* Відступ від нижньої межі (right-bot) */
+    left: 35vw; /* Відступ з урахуванням ширини sidebar */
+    width: 65vw; /* Ширина, яка відповідає правій частині макету */
+    overflow-y: auto; /* Прокручування тільки по вертикалі */
+    background-color: #272727; /* Фон блоку */
+    z-index: 1; /* Щоб не перекривати елементи верхнього рівня */
+}
+
+.section-icon {
+    filter: invert(50%) sepia(110%) saturate(300%) hue-rotate(45deg) brightness(66%);
+    width: 35px;
+    height: 35px;
+    margin-right: 0.5vw;
+    object-fit: contain;
+}
+  
+.about, .education, .experience, .skills {
+    margin-left: 2vw;
+    align-self: start;
+    justify-self: start;
+    color: #535959;
+}
+  
+h1 {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    color: #abb0ac;
+    font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #889999;
+    font-family: 'Poppins', sans-serif;
+}
+  
+p {
+    margin-top: 0;
+    margin-left: 0.5vw;
+    color: #889999;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+hr {
+    border: none;
+    border-top: 0.3vh solid #3b6c13; 
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    width: 55vw; 
+    align-self: center; 
+}
+
+table {
+    width: 60vw;
+    margin-left: 1.2vw;
+    border-collapse: collapse;
+    border: none;
+}
+
+.colum1 {
+    height: 12vh;
+    width: 20vw;
+    vertical-align: top;
+    padding-left: 1vw;
+    vertical-align: center;
+    position: relative;
+}
+
+.colum2 {
+    height: 12vh;
+    width: 40vw;
+    position: relative;
+    vertical-align: top;
+}
+
+.tablepool {
+    border-left: 3px solid #3b6c13;
+}
+
+
+.colum1:first-child::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 1.2vh;
+    width: 13px;
+    height: 13px;
+    background-color: #3b6c13;
+    border-radius: 50%;
+}
+
+
+
+.tablepool:last-child {
+    position: relative;
+}
+
+
+
+.tablepool:last-child::after {
+    content: "";
+    position: absolute;
+    left: -1.2vw;
+    bottom: 0;
+    width: 1.8vw;
+    height: calc(12vh - 1.2vh - 13px);
+    background-color: #272727;
+}
+
+
+
+.skills-table {
+    border-collapse: collapse;
+}
+
+.skill-name {
+    height: 9vh;
+    width: 19vw;
+    padding-left: 1vw;
+    vertical-align: center;
+    position: relative;
+    
+}
+
+.skill-rating {
+    height: 9vh;
+    width: calc(60vw - 19vw);
+    position: relative;
+    text-align: left;
+}
+
+.star {
+    color: #68b300;
+    font-size: 30px;
+}
+
+.empty {
+    color: #5d805d;
+}
+
+.skill-name:first-child::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 3.5vh;
+    width: 13px;
+    height: 13px;
+    background-color: #3b6c13;
+    border-radius: 50%;
+}
+
+.skillpool {
+    border-left: 3px solid #3b6c13;
+}
+
+.skillpool:last-child {
+    position: relative;
+}
+
+.skillpool:last-child::after {
+    content: "";
+    position: absolute;
+    left: -1.2vw;
+    bottom: 0;
+    width: 1.8vw;
+    height: calc(9vh - 3.5vh - 13px);
+    background-color: #272727;
+}
+
+.contacts {
+    justify-self: center;
+    align-self: end;
+    display: grid;
+    grid-template-columns: repeat(5, 8vw);
+    grid-gap: 2vw;
+}
+  
+.contacts img {
+    width: 6vw;
+    height: 6vw;
+    object-fit: contain;
+}
+  
+.contacts a {
+    justify-self: center;
+    font-size: 1vw;
+    color: white;
+    border-radius: 15%;
+    padding: 1vw;
+    margin-bottom: 3vh;
+    background-color: #363636;
+    transition: background-color 0.3s;
+}
+  
+.contacts a:hover {
+    background-color: #3b6c13;
+}
+.sidebar .navigation a.active-animation,
+.contacts a.active-animation {
+    transform: scale(0.9);
+}
+
+
+.blur-top::before, .blur-bottom::after {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 2; 
+}
+
+.blur-top::before {
+    height: 6vh;
+    background: linear-gradient(to bottom, rgba(40, 40, 40, 1), rgba(0, 0, 0, 0));
+    top: 21.5vh;
+    left: 35vw;
+}
+
+.blur-bottom::after {
+    height: 10vh;
+    background: linear-gradient(to top, rgba(39, 39, 39, 1), rgba(255, 39, 39, 0));
+    bottom: 10vh;
+    left: 35vw;
+}
+
+@media (max-width: 1110px) {
+    .star {
+        font-size: 25px;
+    }
+    h1 {
+        font-size: 25px;
+    }
+    
+    h2 {
+
+        font-size: 15px;
+    }
+      
+    p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 1000px) {
+    
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    .left-bot, .left-top, .right-bot, .right-top {
+        display: none !important; 
+    }
+
+    .grid {
+        grid-template-columns: 35vw 1fr;
+        grid-template-areas:
+            "sidebar header"
+            "sidebar content";
+        grid-gap: 1vw;
+    }
+
+    .header {
+        position: sticky;
+        height: 10vh;
+        width: auto;
+        border-bottom: none;
+        top: 0;
+    }
+
+    .content {
+        position: relative;
+        height: auto;
+        width: auto;
+        grid-area: content;
+        top: auto;
+        bottom: auto;
+        left: auto;
+
+    }
+
+    .sidebar {
+        grid-template-areas: 
+            "photo"
+            "name"
+            "navigation";
+        grid-template-columns: 35vw;
+        grid-template-rows: 1fr 10vh 15vh;
+        grid-gap: 0;
+        box-shadow: none;
+        }
+    
+
+    .sidebar .photo {
+        height: 100vh;
+        width: 35vw;
+    }
+    
+    
+    .sidebar .name {
+        width: 35vw;
+        height: 10vh;
+        bottom: auto;
+        justify-content: space-around;
+        align-items: end;
+    }
+    
+    .sidebar .navigation {
+        flex-direction: row;
+        top: auto;
+        height: 15vh;
+        width: 35vw;
+        gap: 1vw;
+        background-color: rgba(9, 18, 0, 0.444);
+        z-index: 7;
+    }
+
+    .sidebar .navigation a {
+        
+        font-size: 18px;
+        width: 6vw;
+        height: 6vw;
+    }
+    
+    .sidebar .navigation img {
+        width: 5vw;
+        height: 5vw;
+    }
+    
+    .blur-top::before {
+        height: 6vh;
+        top: 11vh;
+        left: 36vw;
+
+    }
+    
+    .blur-bottom::after {
+        height: 10vh;
+        bottom: 0;
+        left: 36vw;
+    }
+}
+
+@media (max-width: 835px) {
+    h1 {
+        font-size: 27px;
+    }
+
+    h2 {
+        font-size: 17px;
+    }
+
+    p {
+        font-size: 17px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    
+    .sidebar{
+        display: none !important;
+    }
+
+    hr{
+        width: 75vw;
+    }
+    .grid {
+        
+        grid-template-columns: 100vw;
+        grid-template-rows: 10vh 1fr;
+        grid-template-areas:
+            "header"
+            "content";
+        ;
+        justify-items: center;
+        background-color: #272727;
+    }
+    
+
+    .header{
+        padding-left: 6vw;
+        height: 11vh;
+        width: 100%;
+        border-bottom: 1.5vh solid #1b1b1b;
+    }
+    
+    .content {
+        width: 90vw;
+    }
+
+    table{
+        width: 80vw;
+    }
+
+    .colum1 {
+        width: 30vw;
+        padding-left: 2vw;
+    }
+    
+    .colum2 {
+        width: 50vw;
+        vertical-align: top;
+    }
+
+    .skill-name {
+        width: 20vw;
+        padding-left: 1vw; 
+    }
+    
+    .skill-rating {
+        width: 60vw;
+    }
+
+    .contacts {
+        grid-template-columns: repeat(5, 15vw);
+        grid-gap: 2vw;
+    }
+      
+    .contacts img {
+        width: 10vw;
+        height: 10vw;
+    }
+      
+    .contacts a {
+        font-size: 1vw;
+        border-radius: 15%;
+        padding: 1vw;
+        margin-bottom: 3vh;
+    }
+
+    .blur-top::before {
+        height: 6vh;
+        top: 11vh;
+        left: 0;
+    }
+    
+    .blur-bottom::after {
+        height: 10vh;
+        bottom: 0;
+        left: 0;
+    }
+}
