@@ -25,7 +25,7 @@ html, body {
     color: #c5c5c5;
     font-family: 'Arial', sans-serif;
     position: relative;
-    z-index: 1; /* Ensure content is behind the sidebar shadow */
+    z-index: 1; 
 }
   
 .grid div {
@@ -66,7 +66,7 @@ html, body {
     display: grid;
     position: fixed;
     align-content: end;
-    justify-content: start; /* Вирівнювання контенту по лівому краю */
+    justify-content: start; 
     padding-left: 20px; 
     border-bottom: 1.5vh solid #1b1b1b;
     background: linear-gradient(to right, #232323, #1f1f1f);
@@ -76,12 +76,12 @@ html, body {
 }
 
 .header a {
-    margin-left: 10px; /* Відступ між посиланнями */
-    padding: 10px 20px; /* Внутрішній відступ */
-    font-size: 50px; /* Розмір шрифту */
-    text-decoration: none; /* Заборона підкреслення */
-    color: inherit; /* Спадкування кольору від заголовка */
-    display: inline-block; /* Щоб працювали відступи */
+    margin-left: 10px; 
+    padding: 10px 20px; 
+    font-size: 50px; 
+    text-decoration: none; 
+    color: inherit; 
+    display: inline-block; 
 }
 
 .sidebar {
@@ -97,8 +97,8 @@ html, body {
     grid-template-columns: 10vw 25vw;
     justify-items: center;
     background-color: #1b1b1b;
-    box-shadow: 15px 0 25px rgba(0, 0, 0, 0.5); /* Shadow coming from the left sidebar */
-    z-index: 3; /* Ensure sidebar stays in front of content */
+    box-shadow: 15px 0 25px rgba(0, 0, 0, 0.5); 
+    z-index: 3;
 }
 
 .left-top {
@@ -129,7 +129,7 @@ html, body {
     background-image: url('../image/korshun.png');
     background-size: cover;
     background-position: center;
-    box-shadow: -15px 0 20px rgba(0, 0, 0, 0.7); /* Тінь зліва */
+    box-shadow: -15px 0 20px rgba(0, 0, 0, 0.7);
     z-index: 4;
 }
 
@@ -156,8 +156,8 @@ html, body {
     position: fixed;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Центрує по вертикалі */
-    align-items: center; /* Центрує по горизонталі */
+    justify-content: center; 
+    align-items: center; 
     height: 80vh;
     width: 10vw;
     gap: 2vh;
@@ -167,8 +167,8 @@ html, body {
 
 .sidebar .navigation a {
     display: flex;
-    justify-content: center; /* Центрує контент всередині кнопки по горизонталі */
-    align-items: center; /* Центрує контент всередині кнопки по вертикалі */
+    justify-content: center; 
+    align-items: center;
     border-radius: 10%; 
     color: #c5c5c5;
     font-size: 18px;
@@ -178,6 +178,7 @@ html, body {
     transition: background-color 0.5s;
     text-decoration: none;
 }
+
 
 .sidebar .navigation a:hover {
     background-color: #3b6c13;
@@ -192,14 +193,19 @@ html, body {
 
 .content {
     grid-area: content;
-    position: fixed; /* Фіксоване положення в межах вікна */
-    top: calc(10vh + 11.5vh); /* Відступ від верхньої межі (header) */
-    bottom: 10vh; /* Відступ від нижньої межі (right-bot) */
-    left: 35vw; /* Відступ з урахуванням ширини sidebar */
-    width: 65vw; /* Ширина, яка відповідає правій частині макету */
-    overflow-y: auto; /* Прокручування тільки по вертикалі */
-    background-color: #272727; /* Фон блоку */
-    z-index: 1; /* Щоб не перекривати елементи верхнього рівня */
+    position: fixed; 
+    top: calc(10vh + 11.5vh); 
+    bottom: 10vh; 
+    left: 35vw; 
+    width: 65vw; 
+    overflow-y: auto; 
+    background-color: #272727; 
+    z-index: 1; 
+}
+
+.mobile-text{
+    width: 75%;
+    height: 100%;
 }
 
 .section-icon {
@@ -426,6 +432,178 @@ table {
     left: 35vw;
 }
 
+.burger {
+    opacity: 0;
+    cursor: pointer;
+    display: block ;
+    position: fixed;
+    align-items: center;
+    justify-items: center;
+    right: 5vw;
+    bottom: 12vh;
+    height: 60px;
+    width: 60px;
+    z-index: 50;
+    border-radius: 10%; 
+    background: transparent;
+    background-color: #363636;
+    transition: background-color 0.5s;
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.35);
+}
+
+.burger:hover {
+    background-color: #3b6c13;
+    border: 5px;
+}
+
+.burger span {
+    position: absolute;
+    display: block;
+    height: 4px;
+    width: 55%;
+    background-color: #000;
+    transition: all 0.3s ease;
+    border-radius: 6px; 
+}
+
+.burger::before,
+.burger::after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 70%;
+    background-color: #000;
+    border-radius: 10px; 
+}
+
+.burger::before {
+top: 14px;
+  transition: box-shadow .3s .15s, top .3s .15s, transform .3s;
+}
+
+.burger::after {
+  bottom: 14px;
+  transition: bottom .3s .15s, transform .3s;
+}
+
+.burger.active{
+    background-color: #3b6c13;
+}
+.burger.active span {
+    transform: scaleX(0); 
+    opacity: 0; 
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burger.active::before {
+    top: 28px; 
+    transform: rotate(45deg);
+    box-shadow: 0 6px 0 rgba(0,0,0,0);
+    transition: box-shadow .15s, top .3s, transform .3s .15s;
+}
+
+.burger.active::after {
+    bottom: 28px; 
+    transform: rotate(-45deg);
+    transition: bottom .3s, transform .3s .15s;
+}
+
+
+
+.burger:not(.active)::before {
+    top: 14px; 
+    transform: rotate(0); 
+    transition: top 0.3s ease 0.3s, transform 0.3s ease;
+}
+
+.burger:not(.active)::after {
+    bottom: 14px;
+    transform: rotate(0); 
+    transition: bottom 0.3s ease 0.3s, transform 0.3s ease;
+}
+
+.burger:not(.active) span {
+    transform: scaleX(1);
+    opacity: 1; 
+    transition: transform 0.3s ease 0.3s, opacity 0.3s ease 0.3s;
+}
+
+.burger-navigation {
+    opacity: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 5vw;
+    bottom: 22.5vh;
+    z-index: 5;
+    gap: 1vh;
+    pointer-events: none; 
+    opacity: 0; 
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+
+.burger.active + .burger-navigation {
+    pointer-events: auto; 
+    opacity: 1; 
+    transform: scale(1); 
+}
+
+.burger-navigation a {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(50px); 
+    opacity: 0; 
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: 0s; 
+    background-color: #363636;
+    border-radius: 10%;
+    box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.35);
+}
+
+
+.burger.active + .burger-navigation a {
+    transform: translateY(0);
+    opacity: 1; 
+}
+
+.burger.active + .burger-navigation a:nth-child(5) {
+    transition-delay: 0.1s;
+}
+
+.burger.active + .burger-navigation a:nth-child(4) {
+    transition-delay: 0.3s;
+}
+
+.burger.active + .burger-navigation a:nth-child(3) {
+    transition-delay: 0.5s;
+}
+
+.burger.active + .burger-navigation a:nth-child(2) {
+    transition-delay: 0.7s;
+}
+
+.burger.active + .burger-navigation a:nth-child(1) {
+    transition-delay: 0.9s;
+}
+
+.burger-navigation a:hover {
+    background-color: #3b6c13;
+}
+
+.burger-navigation img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+
 @media (max-width: 1110px) {
     .star {
         font-size: 25px;
@@ -488,6 +666,15 @@ table {
         left: auto;
 
     }
+    .colum1 {
+        padding-left: 2vw;
+    }
+    
+
+    .skill-name {
+        padding-left: 2vw; 
+    }
+    
 
     .sidebar {
         grid-template-areas: 
@@ -568,6 +755,7 @@ table {
 
 @media (max-width: 768px) {
     
+    
     .sidebar{
         display: none !important;
     }
@@ -595,17 +783,13 @@ table {
         border-bottom: 1.5vh solid #1b1b1b;
     }
     
-    .content {
-        width: 90vw;
-    }
+    .content {width: 90vw;}
 
-    table{
-        width: 80vw;
-    }
+    table{width: 80vw;}
 
     .colum1 {
         width: 30vw;
-        padding-left: 2vw;
+        padding-left: 3vw;
     }
     
     .colum2 {
@@ -615,12 +799,10 @@ table {
 
     .skill-name {
         width: 20vw;
-        padding-left: 1vw; 
+        padding-left: 3vw; 
     }
     
-    .skill-rating {
-        width: 60vw;
-    }
+    .skill-rating {width: 60vw;}
 
     .contacts {
         grid-template-columns: repeat(5, 15vw);
@@ -650,4 +832,48 @@ table {
         bottom: 0;
         left: 0;
     }
+
+    .burger {opacity: 1;}
+
+    .outline {
+        display: grid;
+        position: relative;
+        grid-template-columns: 40vw 50vw; 
+        grid-template-areas: "mobile-photo mobile-text";
+        align-items: center;
+        height: auto;
+        height: 60vh
+    }
+    
+    .mobile-photo {
+        display: flex;
+        position: relative;
+        grid-area: mobile-photo;
+        background-image: url('../image/korshun_phone.png');
+        background-size: cover; 
+        background-position: right ; 
+        
+        width: 45vw;
+        height: 60vh;
+    }
+    
+    .mobile-text {
+        grid-area: mobile-text;
+        height: 60vh;
+        display: flex; 
+        flex-direction: column;
+        text-justify: flex-end;
+        text-align: left; 
+        line-height: 1.5;
+    }
 }
+
+@media (max-width: 650px) {
+    h2 {
+        font-size: 12px;
+    }
+
+    p{
+        font-size: 12px;
+    }
+} 
