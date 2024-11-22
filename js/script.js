@@ -3,17 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const fixedBottomOffset = 10 * window.innerHeight / 100;
 
     function handleScroll() {
-        const scrollTop = content.scrollTop; // Відстань прокрутки зверху
-        const clientHeight = content.clientHeight; // Висота видимої частини
-        const scrollHeight = content.scrollHeight; // Загальна висота контенту
+        const scrollTop = content.scrollTop;
+        const clientHeight = content.clientHeight;
+        const scrollHeight = content.scrollHeight;
 
-        // Визначення, чи потрібно розмиття зверху
         const topBlur = scrollTop > 0;
 
-        // Визначення, чи потрібно розмиття знизу
         const bottomBlur = scrollTop + clientHeight < scrollHeight - fixedBottomOffset;
 
-        // Додаємо або видаляємо класи для розмиття
         if (topBlur) {
             content.classList.add('blur-top');
         } else {
@@ -27,17 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Додаємо обробник події прокрутки
     content.addEventListener('scroll', handleScroll);
-
-    // Викликаємо функцію при завантаженні сторінки
     handleScroll();
 });
 
 
 
-// Додаємо анімацію для кнопок у навігації
-document.querySelectorAll('.sidebar .navigation a, .contacts a').forEach(button => {
+
+document.querySelectorAll('.sidebar .navigation a, .contacts a, .burger-navigation a').forEach(button => {
     button.addEventListener('mousedown', () => {
         button.classList.add('active-animation');
     });
@@ -54,18 +48,25 @@ document.querySelectorAll('.sidebar .navigation a, .contacts a').forEach(button 
 });
 
 
-document.querySelectorAll('.sidebar .navigation a').forEach(link => {
+document.querySelectorAll('.sidebar .navigation a, .burger-navigation a').forEach(link => {
     link.addEventListener('click', event => {
-        event.preventDefault(); // Забороняємо стандартну поведінку посилання
+        event.preventDefault();
 
-        const targetId = link.getAttribute('href').slice(1); // Отримуємо ID цілі
+        const targetId = link.getAttribute('href').slice(1);
         const targetElement = document.getElementById(targetId);
 
         if (targetElement) {
             targetElement.scrollIntoView({
-                behavior: 'smooth', // Плавна прокрутка
-                block: 'start' // Прокрутка до початку елемента
+                behavior: 'smooth',
+                block: 'start'
             });
         }
     });
+});
+
+
+
+const burger = document.querySelector('.burger');
+burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
 });
